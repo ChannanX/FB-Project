@@ -50,7 +50,7 @@
       <button
         type="submit"
         class="btn btn-light col"
-        style="background-color:gold"
+        style="background-color: gold"
         @click="showmenu()"
       >
         Showmenu
@@ -86,22 +86,17 @@
 
 <script setup>
 import { ref } from "vue";
-import {
-  collection,
-  addDoc,
-  getDocs,
-  doc,
-  deleteDoc,
-} from "firebase/firestore";
+import { collection, addDoc, getDocs, doc, deleteDoc } from "firebase/firestore";
 import { db } from "../main.js";
 
-const menu = ref({ nameTH: "", nameEn: "", price: 0, detail: "" });
+const menu = ref({ nameTH: "", nameEn: "", price: null, detail: "" });
 const allmenu = ref([]);
 
 async function addUserData() {
   try {
     const docRef = await addDoc(collection(db, "foodmenu"), menu.value);
     console.log("Document written with ID: ", docRef.id);
+    location.reload();
   } catch (e) {
     console.error("Error adding document: ", e);
   }
